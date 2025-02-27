@@ -1,6 +1,6 @@
 import pygame.math as pgm
 import pygame as pg
-import Polyhedra
+import Polyhedron
 
 class Camera:
     def __init__(self, position: pgm.Vector3, focal_len: [int, float], ):
