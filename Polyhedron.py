@@ -24,11 +24,14 @@ class Polyhedron:
 
 class Octahedron(Polyhedron):
 
-    def __init__(self, position: pgm.Vector3, scale_factor: [int | float]):
-        Polyhedron.__init__(self, position, scale_factor)
+    def __init__(self, position: pgm.Vector3,
+                 scale_factor: [int | float],
+                 draw_color: [tuple[int | float] | pg.Color | None]):
+        Polyhedron.__init__(self, position, scale_factor, draw_color)
         self.vertices = [pgm.Vector3(1, 0, 0),
                          pgm.Vector3(0, 1, 0),
                          pgm.Vector3(0, 0, 1),
                          pgm.Vector3(-1, 0, 0),
                          pgm.Vector3(0, -1, 0),
                          pgm.Vector3(0, 0, -1)]
+        self.scale(scale_factor)

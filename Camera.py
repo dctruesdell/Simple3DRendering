@@ -22,7 +22,7 @@ class Camera:
     def draw_polyhedron(self, poly: Polyhedron):
         screen_coords = []
         for vertex in poly.vertices:
-            screen_coords.append(self.__xyz_to_xy(vertex))
+            screen_coords.append(self.__xyz_to_xy(vertex + poly.position))
 
         for px in screen_coords:
             pg.draw.circle(self.screen, poly.draw_color, px, 3)
