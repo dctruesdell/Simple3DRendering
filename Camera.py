@@ -2,10 +2,15 @@ import pygame.math as pgm
 import pygame as pg
 import Polyhedron
 
+
 class Camera:
-    def __init__(self, position: pgm.Vector3, focal_len: [int, float], ):
+    def __init__(self,
+                 position: pgm.Vector3,
+                 focal_len: [int, float],
+                 screen: pg.display):
         self.position = position
         self.focal_len = focal_len
+        self.screen = screen
 
     def __xyz_to_xy(self, vector: pgm.Vector3):
         r = self.position.distance_to(vector)
@@ -14,10 +19,10 @@ class Camera:
         ypos = vector.y * focal_ratio
         return pgm.Vector2(xpos, ypos)
 
-    def draw_polyhedron(self, screen: pg.display, poly: Polyhedra):
+    def draw_polyhedron(self, poly: Polyhedron):
         screen_coords = []
         for vertex in poly.vertices:
             screen_coords.append(self.__xyz_to_xy(vertex))
 
         for px in screen_coords:
-            pg.draw.line(screen, poly.draw_color, px, px)
+            pg.draw.circle(self.screen, poly.draw_color, px, 3)
