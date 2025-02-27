@@ -1,12 +1,16 @@
 import pygame.math as pgm
+import pygame as pg
 import typing
 
 
 class Polyhedra:
-    def __init__(self, position: pgm.Vector3, scale_factor: [int, float]):
+    def __init__(self, position: pgm.Vector3,
+                 scale_factor: [int, float],
+                 draw_color: [tuple[int | float] | pg.Color | None]):
         self.position = position
         self.scale_factor = scale_factor
         self.vertices = []
+        self.draw_color = draw_color
 
     def translate(self, translation_vector: pgm.Vector3) -> None:
         self.position += translation_vector
