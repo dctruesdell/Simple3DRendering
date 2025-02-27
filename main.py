@@ -1,6 +1,6 @@
 import pygame as pg
 import pygame.math as pgm
-from Polyhedron import Octahedron
+from Polyhedron import Octahedron, Axis
 from Camera import Camera
 
 
@@ -8,7 +8,7 @@ RESOLUTION = 1000, 600
 BG_COLOR = "black"
 FRAME_RATE = 30
 
-OCTAHEDRON = Octahedron(pgm.Vector3(0, 0, 0), 30, (0, 0, 255))
+OCTAHEDRON = Octahedron(pgm.Vector3(256, 256, 0), 100, (0, 0, 255))
 
 
 
@@ -27,6 +27,7 @@ def main():
                 running = False
 
         screen.fill(BG_COLOR)
+        OCTAHEDRON.rotate(Axis.X, 10)
         camera.draw_polyhedron(OCTAHEDRON)
         pg.display.flip()
         clock.tick(FRAME_RATE)
