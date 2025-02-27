@@ -3,7 +3,7 @@ import pygame as pg
 import typing
 
 
-class Polyhedra:
+class Polyhedron:
     def __init__(self, position: pgm.Vector3,
                  scale_factor: [int, float],
                  draw_color: [tuple[int | float] | pg.Color | None]):
@@ -22,10 +22,10 @@ class Polyhedra:
         self.vertices = new_verts
 
 
-class Octahedron(Polyhedra):
+class Octahedron(Polyhedron):
 
     def __init__(self, position: pgm.Vector3, scale_factor: [int | float]):
-        Polyhedra.__init__(self, position, scale_factor)
+        Polyhedron.__init__(self, position, scale_factor)
         self.vertices = [pgm.Vector3(1, 0, 0),
                          pgm.Vector3(0, 1, 0),
                          pgm.Vector3(0, 0, 1),
