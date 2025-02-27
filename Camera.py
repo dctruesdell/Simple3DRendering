@@ -11,6 +11,8 @@ class Camera:
         self.position = position
         self.focal_len = focal_len
         self.screen = screen
+        screen_size = pg.display.get_window_size()
+        self.screen_offset = pgm.Vector2(screen_size[0] // 2, screen_size[1] // 2)
 
     def __xyz_to_xy(self, vector: pgm.Vector3):
         r = self.position.distance_to(vector)
@@ -22,7 +24,7 @@ class Camera:
     def draw_polyhedron(self, poly: Polyhedron):
         screen_coords = []
         for vertex in poly.vertices:
-            screen_coords.append(self.__xyz_to_xy(vertex + poly.position))
+            screen_coords.append(self.__xyz_to_xy(vertex))
 
         for px in screen_coords:
-            pg.draw.circle(self.screen, poly.draw_color, px, 3)
+            pg.draw.circle(self.screen, poly.draw_color, px + self.screen_offset, 3)
