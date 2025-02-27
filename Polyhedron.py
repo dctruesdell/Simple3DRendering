@@ -36,29 +36,31 @@ class Polyhedron:
                         radians by default
         :return: None
         """
+        if degrees:
+            angle = angle * (180 / math.pi)
         new_verts = []
-        cos_angle = math.cos(angle)
-        sin_angle = math.sin(angle)
+        # to account for the non-traditional coordinates
+        cos_angle = math.cos(angle) * -1
+        sin_angle = math.sin(angle) * -1
         if axis == Axis.X:
             for vertex in self.vertices:
                 y = (vertex.y * cos_angle) - (vertex.z * sin_angle)
                 z = (vertex.y * sin_angle) + (vertex.z * cos_angle)
                 new_verts.append(pgm.Vector3(vertex.x, y, z))
-        self.vertices = new_verts
 
-        if axis == Axis.Y:
+        elif axis == Axis.Y:
             for vertex in self.vertices:
                 x = (vertex.x * cos_angle) + (vertex.z * sin_angle)
-                z = (vertex.z * cos_angle) - (vertex.y * sin_angle)
+                z = (vertex.z * cos_angle) - (vertex.x * sin_angle)
                 new_verts.append(pgm.Vector3(x, vertex.y, z))
-        self.vertices = new_verts
 
-        if axis == Axis.Z:
+        elif axis == Axis.Z:
             for vertex in self.vertices:
                 x = (vertex.x * cos_angle) - (vertex.y * sin_angle)
-                y = (vertex.y * sin_angle) + (vertex.y * cos_angle)
+                y = (vertex.x * sin_angle) + (vertex.y * cos_angle)
                 new_verts.append(pgm.Vector3(x, y, vertex.z))
-        self.vertices = new_verts
+
+        self.vertices = new_verts.copy()
 
     def scale(self, factor) -> NoReturn:
         """
