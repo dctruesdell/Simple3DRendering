@@ -1,6 +1,7 @@
 import pygame.math as pgm
 import pygame as pg
 import Polyhedron
+from typing import NoReturn
 
 
 class Camera:
@@ -14,14 +15,25 @@ class Camera:
         screen_size = pg.display.get_window_size()
         self.screen_offset = pgm.Vector2(screen_size[0] // 2, screen_size[1] // 2)
 
-    def __xyz_to_xy(self, vector: pgm.Vector3):
+    def __xyz_to_xy(self, vector: pgm.Vector3) -> pgm.Vector2:
+        """
+        Convert a Vector3 to a 2d screen space
+        :param vector: The 3d Vector to be converted
+        :return: A 2d Vector representing where the input should be rendered
+                in screen space
+        """
         r = self.position.distance_to(vector)
         focal_ratio = self.focal_len / r
         xpos = vector.x * focal_ratio
         ypos = vector.y * focal_ratio
         return pgm.Vector2(xpos, ypos)
 
-    def draw_polyhedron(self, poly: Polyhedron):
+    def draw_polyhedron(self, poly: Polyhedron) -> NoReturn:
+        """
+        Draw a 3d shape
+        :param poly: Any Polyhedron Object
+        :return: None
+        """
         screen_coords = []
         for vertex in poly.vertices:
             screen_coords.append(self.__xyz_to_xy(vertex))

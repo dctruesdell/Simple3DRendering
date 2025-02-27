@@ -1,5 +1,5 @@
 import math
-
+from typing import NoReturn
 import pygame.math as pgm
 import pygame as pg
 from enum import Enum
@@ -19,10 +19,23 @@ class Polyhedron:
         self.vertices = []
         self.draw_color = draw_color
 
-    def translate(self, translation_vector: pgm.Vector3) -> None:
+    def translate(self, translation_vector: pgm.Vector3) -> NoReturn:
+        """
+        Translates a point in space
+        :param translation_vector: The Vector3 to move
+        :return: None
+        """
         self.position += translation_vector
 
-    def rotate(self, axis: Axis, angle):
+    def rotate(self, axis: Axis, angle: [int | float], degrees: bool = False) -> NoReturn:
+        """
+        Rotates the polyhedron about its center
+        :param axis: Axis.X, Axis.Y, or Axis.Z: The axis about which to rotate the solid
+        :param angle: The angle of rotation
+        :param degrees: If true, rotates by degrees. If false, rotates by radians. Uses
+                        radians by default
+        :return: None
+        """
         new_verts = []
         cos_angle = math.cos(angle)
         sin_angle = math.sin(angle)
@@ -47,11 +60,12 @@ class Polyhedron:
                 new_verts.append(pgm.Vector3(x, y, vertex.z))
         self.vertices = new_verts
 
-    # shape[i].y = (shape[i].y * rcos(deg)) - (shape[i].z * rsin(deg))
-    # shape[i].z = (shape[i].y * rsin(deg)) + (shape[i].z * rcos(deg))
-
-
-    def scale(self, factor) -> None:
+    def scale(self, factor) -> NoReturn:
+        """
+        Scales a polyhedron by a scale factor
+        :param factor: the amount by which to scale the solid
+        :return: None
+        """
         new_verts = []
         for vertex in self.vertices:
             new_verts.append(vertex * factor)
