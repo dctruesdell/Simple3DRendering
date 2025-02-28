@@ -9,6 +9,7 @@ BG_COLOR = "black"
 FRAME_RATE = 30
 
 OCTAHEDRON = Octahedron(pgm.Vector3(256, 256, 0), 100, (0, 0, 255))
+ROTATE_AMOUNT = 1
 
 
 def main():
@@ -25,11 +26,27 @@ def main():
             if event.type == pg.QUIT:
                 running = False
 
-        screen.fill(BG_COLOR)
-        OCTAHEDRON.rotate(Axis.X, 1 / FRAME_RATE, True)
-        OCTAHEDRON.rotate(Axis.Y, 1 / FRAME_RATE, True)
+        # reads full keyboard
+        keys_down = pg.key.get_pressed()
+        if keys_down[pg.K_UP]:
+            OCTAHEDRON.rotate(Axis.X, ROTATE_AMOUNT, True)
+        elif keys_down[pg.K_DOWN]:
+            OCTAHEDRON.rotate(Axis.X, -ROTATE_AMOUNT, True)
 
-        camera.draw_polyhedron_vertices(OCTAHEDRON)
+        if keys_down[pg.K_LEFT]:
+            OCTAHEDRON.rotate(Axis.Y, ROTATE_AMOUNT, True)
+        elif keys_down[pg.K_RIGHT]:
+            OCTAHEDRON.rotate(Axis.Y, -ROTATE_AMOUNT, True)
+
+        if keys_down[pg.K_z]:
+            OCTAHEDRON.rotate(Axis.Z, ROTATE_AMOUNT, True)
+        elif keys_down[pg.K_x]:
+            OCTAHEDRON.rotate(Axis.X, -ROTATE_AMOUNT, True)
+
+        # draw step
+        screen.fill(BG_COLOR)
+
+        camera.draw_polyhedron_wireframe(OCTAHEDRON, 1)
         pg.display.flip()
         clock.tick(FRAME_RATE)
 
