@@ -4,6 +4,7 @@ import pygame.math as pgm
 import pygame as pg
 from enum import Enum
 
+
 class Axis(Enum):
     X = "x"
     Y = "y"
@@ -12,12 +13,27 @@ class Axis(Enum):
 
 class Polyhedron:
     def __init__(self, position: pgm.Vector3,
-                 scale_factor: [int, float],
-                 draw_color: [tuple[int | float] | pg.Color | None]):
+                 scale_factor: int | float,
+                 vertices: list[pgm.Vector3, ...] | None,
+                 draw_color: tuple[int | float, ...] | pg.Color,
+                 line_segments: tuple[tuple[int, int], ...]):
+        """
+        A class that creates a solid for the camera to draw.
+        :param position: The Polyhedron's position in 3d space
+        :param scale_factor: The amount by which to scale the shape. Default shapes
+                            are defined in terms of relative coordinates and must be
+                            scaled to render properly.
+        :param vertices: A list of vertices that define the solid
+        :param draw_color:  The color to draw the shape.
+        :param line_segments: A tuple of 2 index tuples that defines which vertices should be connected by the
+                            renderer. The vertices are defined by their index in the vertex list.
+
+        """
         self.position = position
         self.scale_factor = scale_factor
-        self.vertices = []
+        self.vertices = vertices
         self.draw_color = draw_color
+        self.line_segments = line_segments
 
     def translate(self, translation_vector: pgm.Vector3) -> NoReturn:
         """
@@ -27,7 +43,7 @@ class Polyhedron:
         """
         self.position += translation_vector
 
-    def rotate(self, axis: Axis, angle: [int | float], degrees: bool = False) -> NoReturn:
+    def rotate(self, axis: Axis, angle: int | float, degrees: bool = False) -> NoReturn:
         """
         Rotates the polyhedron about its center
         :param axis: Axis.X, Axis.Y, or Axis.Z: The axis about which to rotate the solid
@@ -77,13 +93,18 @@ class Polyhedron:
 class Octahedron(Polyhedron):
 
     def __init__(self, position: pgm.Vector3,
-                 scale_factor: [int | float],
-                 draw_color: [tuple[int | float] | pg.Color | None]):
-        Polyhedron.__init__(self, position, scale_factor, draw_color)
+                 scale_factor: int | float,
+                 draw_color: tuple[int | float] | pg.Color,
+                 line_segments: tuple[tuple[int, int], ...]
+                 ):
+
+        Polyhedron.__init__(self, position, scale_factor, draw_color, None)
         self.vertices = [pgm.Vector3(1, 0, 0),
                          pgm.Vector3(0, 1, 0),
                          pgm.Vector3(0, 0, 1),
                          pgm.Vector3(-1, 0, 0),
                          pgm.Vector3(0, -1, 0),
                          pgm.Vector3(0, 0, -1)]
+        self.line_segments = line_segments
         self.scale(scale_factor)
+

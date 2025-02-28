@@ -7,7 +7,7 @@ from typing import NoReturn
 class Camera:
     def __init__(self,
                  position: pgm.Vector3,
-                 focal_len: [int, float],
+                 focal_len: int | float,
                  screen: pg.display):
         self.position = position
         self.focal_len = focal_len
@@ -40,3 +40,4 @@ class Camera:
 
         for px in screen_coords:
             pg.draw.circle(self.screen, poly.draw_color, px + self.screen_offset, 3)
+
