@@ -55,7 +55,7 @@ class Polyhedron:
         :return: None
         """
         if degrees:
-            angle = angle * (180 / math.pi)
+            angle = angle * (math.pi / 180)
         new_verts = []
         # to account for the non-traditional coordinates
         cos_angle = math.cos(angle) * -1
