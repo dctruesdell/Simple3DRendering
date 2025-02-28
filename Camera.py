@@ -28,7 +28,7 @@ class Camera:
         ypos = vector.y * focal_ratio
         return pgm.Vector2(xpos, ypos)
 
-    def draw_polyhedron(self, poly: Polyhedron) -> NoReturn:
+    def draw_polyhedron_vertices(self, poly: Polyhedron) -> NoReturn:
         """
         Draw a 3d shape
         :param poly: Any Polyhedron Object
