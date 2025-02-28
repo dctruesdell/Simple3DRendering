@@ -45,6 +45,10 @@ class Camera:
         for px in screen_coords:
             pg.draw.circle(self.screen, poly.draw_color, px, 3)
 
-    def draw_polyhedron_wireframe(self, poly: Polyhedron) -> NoReturn:
-        pass
+    def draw_polyhedron_wireframe(self, poly: Polyhedron, line_weight: int | float) -> NoReturn:
+        screen_coords = self.__get_screen_coords(poly)
+        for segment in poly.line_segments:
+            pg.draw.line(self.screen, poly.draw_color,
+                         screen_coords[segment[0]], screen_coords[segment[1]],
+                         line_weight)
 
