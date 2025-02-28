@@ -11,7 +11,6 @@ FRAME_RATE = 30
 OCTAHEDRON = Octahedron(pgm.Vector3(256, 256, 0), 100, (0, 0, 255))
 
 
-
 def main():
     pg.init()
     screen = pg.display.set_mode(RESOLUTION)
@@ -27,8 +26,10 @@ def main():
                 running = False
 
         screen.fill(BG_COLOR)
-        OCTAHEDRON.rotate(Axis.X, 10)
-        camera.draw_polyhedron(OCTAHEDRON)
+        OCTAHEDRON.rotate(Axis.X, 1 / FRAME_RATE, True)
+        OCTAHEDRON.rotate(Axis.Y, 1 / FRAME_RATE, True)
+
+        camera.draw_polyhedron_vertices(OCTAHEDRON)
         pg.display.flip()
         clock.tick(FRAME_RATE)
 
