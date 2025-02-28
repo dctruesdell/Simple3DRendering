@@ -113,6 +113,10 @@ class Octahedron(Polyhedron):
                               (4, 3),
                               (4, 2),
                               (4, 5),
-                              (4, 0))
+                              (4, 0),
+                              (5, 3),
+                              (3, 2),
+                              (2, 0),
+                              (0, 5))
         self.scale(scale_factor)
 
