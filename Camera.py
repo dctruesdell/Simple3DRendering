@@ -28,16 +28,23 @@ class Camera:
         ypos = vector.y * focal_ratio
         return pgm.Vector2(xpos, ypos)
 
+    def __get_screen_coords(self, poly: Polyhedron):
+        screen_coords = []
+        for vertex in poly.vertices:
+            screen_coords.append(self.__xyz_to_xy(vertex))
+        return screen_coords
+
     def draw_polyhedron_vertices(self, poly: Polyhedron) -> NoReturn:
         """
         Draw a 3d shape
         :param poly: Any Polyhedron Object
         :return: None
         """
-        screen_coords = []
-        for vertex in poly.vertices:
-            screen_coords.append(self.__xyz_to_xy(vertex))
+        screen_coords = self.__get_screen_coords(poly)
 
         for px in screen_coords:
             pg.draw.circle(self.screen, poly.draw_color, px + self.screen_offset, 3)
+
+    def draw_polyhedron_wireframe(self, poly: Polyhedron) -> NoReturn:
+        pass
 
