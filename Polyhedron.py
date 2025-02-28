@@ -96,7 +96,7 @@ class Octahedron(Polyhedron):
 
     def __init__(self, position: pgm.Vector3,
                  scale_factor: int | float,
-                 draw_color: tuple[int | float] | pg.Color,
+                 draw_color: tuple[int | float, ...] | pg.Color,
                  ):
 
         Polyhedron.__init__(self, position, scale_factor, None, None, draw_color)
