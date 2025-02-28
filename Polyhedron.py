@@ -15,10 +15,12 @@ class Polyhedron:
     def __init__(self, position: pgm.Vector3,
                  scale_factor: int | float,
                  vertices: list[pgm.Vector3, ...] | None,
-                 draw_color: tuple[int | float, ...] | pg.Color,
-                 line_segments: tuple[tuple[int, int], ...]):
+                 line_segments: tuple[tuple[int, int], ...] | None,
+                 draw_color: tuple[int | float, ...] | pg.Color
+                 ):
         """
         A class that creates a solid for the camera to draw.
+        Note: vertices and line_segments should only be listed as none for pre-built shapes.
         :param position: The Polyhedron's position in 3d space
         :param scale_factor: The amount by which to scale the shape. Default shapes
                             are defined in terms of relative coordinates and must be
@@ -95,16 +97,22 @@ class Octahedron(Polyhedron):
     def __init__(self, position: pgm.Vector3,
                  scale_factor: int | float,
                  draw_color: tuple[int | float] | pg.Color,
-                 line_segments: tuple[tuple[int, int], ...]
                  ):
 
-        Polyhedron.__init__(self, position, scale_factor, draw_color, None)
+        Polyhedron.__init__(self, position, scale_factor, None, None, draw_color)
         self.vertices = [pgm.Vector3(1, 0, 0),
                          pgm.Vector3(0, 1, 0),
                          pgm.Vector3(0, 0, 1),
                          pgm.Vector3(-1, 0, 0),
                          pgm.Vector3(0, -1, 0),
                          pgm.Vector3(0, 0, -1)]
-        self.line_segments = line_segments
+        self.line_segments = ((1, 3),
+                              (1, 2),
+                              (1, 5),
+                              (1, 0),
+                              (4, 3),
+                              (4, 2),
+                              (4, 5),
+                              (4, 0))
         self.scale(scale_factor)
 
