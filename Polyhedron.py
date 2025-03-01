@@ -120,5 +120,21 @@ class Octahedron(Polyhedron):
                               (0, 5))
         self.scale(scale_factor)
 
+class Cube(Polyhedron):
 
+    def __init__(self, position: Vector3,
+                 scale_factor: int | float,
+                 draw_color: tuple[int | float, ...] | pg.Color,
+                 ):
+        Polyhedron.__init__(self, position, scale_factor, None, None, draw_color)
+        self.vertices = [Vector3(1, 1, 1),
+                         Vector3(1, 1, -1),
+                         Vector3(1, -1, 1),
+                         Vector3(1, -1, -1),
+                         Vector3(-1, 1, 1),
+                         Vector3(-1, 1, -1),
+                         Vector3(-1, -1, 1),
+                         Vector3(-1, -1, -1)]
+        self.line_segments = ()
+        self.scale(scale_factor)
 
