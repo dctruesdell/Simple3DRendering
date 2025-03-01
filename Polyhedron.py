@@ -120,6 +120,7 @@ class Octahedron(Polyhedron):
                               (0, 5))
         self.scale(scale_factor)
 
+
 class Cube(Polyhedron):
 
     def __init__(self, position: Vector3,
@@ -135,6 +136,16 @@ class Cube(Polyhedron):
                          Vector3(-1, 1, -1),
                          Vector3(-1, -1, 1),
                          Vector3(-1, -1, -1)]
-        self.line_segments = ()
+        self.line_segments = ((0, 4),
+                              (4, 5),
+                              (5, 1),
+                              (1, 0),
+                              (2, 6),
+                              (6, 7),
+                              (7, 3),
+                              (3, 2),
+                              (1, 3),
+                              (0, 2),
+                              (4, 6),
+                              (5, 7))
         self.scale(scale_factor)
-

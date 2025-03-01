@@ -35,7 +35,7 @@ def main():
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_c:
                     active_shape += 1
-                    if active_shape > len(SHAPES):
+                    if active_shape >= len(SHAPES):
                         active_shape = 0
 
         # reads full keyboard
@@ -54,7 +54,6 @@ def main():
             SHAPES[active_shape].rotate(Axis.Z, ROTATE_AMOUNT, True)
         elif keys_down[pg.K_z]:
             SHAPES[active_shape].rotate(Axis.Z, -ROTATE_AMOUNT, True)
-
 
         # draw step
         screen.fill(BG_COLOR)
