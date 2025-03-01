@@ -58,8 +58,8 @@ class Polyhedron:
             angle = angle * (math.pi / 180)
         new_verts = []
         # to account for the non-traditional coordinates
-        cos_angle = math.cos(angle) * -1
-        sin_angle = math.sin(angle) * -1
+        cos_angle = math.cos(angle)
+        sin_angle = math.sin(angle)
         if axis == Axis.X:
             for vertex in self.vertices:
                 y = (vertex.y * cos_angle) - (vertex.z * sin_angle)
