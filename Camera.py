@@ -31,7 +31,7 @@ class Camera:
     def __get_screen_coords(self, poly: Polyhedron):
         screen_coords = []
         for vertex in poly.vertices:
-            screen_coords.append(self.__xyz_to_xy(vertex) + self.screen_offset)
+            screen_coords.append(self.__xyz_to_xy(vertex + self.position) + self.screen_offset)
         return screen_coords
 
     def draw_polyhedron_vertices(self, poly: Polyhedron) -> NoReturn:
