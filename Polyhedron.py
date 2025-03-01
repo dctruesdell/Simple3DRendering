@@ -1,6 +1,6 @@
 import math
 from typing import NoReturn
-import pygame.math as pgm
+from pygame.math import Vector3, Vector2
 import pygame as pg
 from enum import Enum
 
@@ -12,9 +12,9 @@ class Axis(Enum):
 
 
 class Polyhedron:
-    def __init__(self, position: pgm.Vector3,
+    def __init__(self, position: Vector3,
                  scale_factor: int | float,
-                 vertices: list[pgm.Vector3, ...] | None,
+                 vertices: list[Vector3, ...] | None,
                  line_segments: tuple[tuple[int, int], ...] | None,
                  draw_color: tuple[int | float, ...] | pg.Color
                  ):
@@ -37,7 +37,7 @@ class Polyhedron:
         self.draw_color = draw_color
         self.line_segments = line_segments
 
-    def translate(self, translation_vector: pgm.Vector3) -> NoReturn:
+    def translate(self, translation_vector: Vector3) -> NoReturn:
         """
         Translates a point in space
         :param translation_vector: The Vector3 to move
@@ -64,19 +64,19 @@ class Polyhedron:
             for vertex in self.vertices:
                 y = (vertex.y * cos_angle) - (vertex.z * sin_angle)
                 z = (vertex.y * sin_angle) + (vertex.z * cos_angle)
-                new_verts.append(pgm.Vector3(vertex.x, y, z))
+                new_verts.append(Vector3(vertex.x, y, z))
 
         elif axis == Axis.Y:
             for vertex in self.vertices:
                 x = (vertex.x * cos_angle) + (vertex.z * sin_angle)
                 z = (vertex.z * cos_angle) - (vertex.x * sin_angle)
-                new_verts.append(pgm.Vector3(x, vertex.y, z))
+                new_verts.append(Vector3(x, vertex.y, z))
 
         elif axis == Axis.Z:
             for vertex in self.vertices:
                 x = (vertex.x * cos_angle) - (vertex.y * sin_angle)
                 y = (vertex.x * sin_angle) + (vertex.y * cos_angle)
-                new_verts.append(pgm.Vector3(x, y, vertex.z))
+                new_verts.append(Vector3(x, y, vertex.z))
 
         self.vertices = new_verts.copy()
 
@@ -94,18 +94,18 @@ class Polyhedron:
 
 class Octahedron(Polyhedron):
 
-    def __init__(self, position: pgm.Vector3,
+    def __init__(self, position: Vector3,
                  scale_factor: int | float,
                  draw_color: tuple[int | float, ...] | pg.Color,
                  ):
 
         Polyhedron.__init__(self, position, scale_factor, None, None, draw_color)
-        self.vertices = [pgm.Vector3(1, 0, 0),
-                         pgm.Vector3(0, 1, 0),
-                         pgm.Vector3(0, 0, 1),
-                         pgm.Vector3(-1, 0, 0),
-                         pgm.Vector3(0, -1, 0),
-                         pgm.Vector3(0, 0, -1)]
+        self.vertices = [Vector3(1, 0, 0),
+                         Vector3(0, 1, 0),
+                         Vector3(0, 0, 1),
+                         Vector3(-1, 0, 0),
+                         Vector3(0, -1, 0),
+                         Vector3(0, 0, -1)]
         self.line_segments = ((1, 3),
                               (1, 2),
                               (1, 5),
@@ -119,4 +119,6 @@ class Octahedron(Polyhedron):
                               (2, 0),
                               (0, 5))
         self.scale(scale_factor)
+
+
 
