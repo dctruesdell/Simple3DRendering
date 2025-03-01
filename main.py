@@ -33,15 +33,15 @@ def main():
         elif keys_down[pg.K_DOWN]:
             OCTAHEDRON.rotate(Axis.X, -ROTATE_AMOUNT, True)
 
-        if keys_down[pg.K_LEFT]:
+        if keys_down[pg.K_RIGHT]:
             OCTAHEDRON.rotate(Axis.Y, ROTATE_AMOUNT, True)
-        elif keys_down[pg.K_RIGHT]:
+        elif keys_down[pg.K_LEFT]:
             OCTAHEDRON.rotate(Axis.Y, -ROTATE_AMOUNT, True)
 
-        if keys_down[pg.K_z]:
+        if keys_down[pg.K_x]:
             OCTAHEDRON.rotate(Axis.Z, ROTATE_AMOUNT, True)
-        elif keys_down[pg.K_x]:
-            OCTAHEDRON.rotate(Axis.X, -ROTATE_AMOUNT, True)
+        elif keys_down[pg.K_z]:
+            OCTAHEDRON.rotate(Axis.Z, -ROTATE_AMOUNT, True)
 
         # draw step
         screen.fill(BG_COLOR)
