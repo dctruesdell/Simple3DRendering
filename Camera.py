@@ -2,13 +2,21 @@ from pygame.math import Vector3, Vector2
 import pygame as pg
 import Polyhedron
 from typing import NoReturn
+from Object3D import *
 
 
-class Camera:
+class Camera(Object3D):
     def __init__(self,
                  position: Vector3,
                  focal_len: int | float,
                  screen: pg.display):
+        """
+        A helper class to render in 3D to a pygame display.
+        :param position: The camera's position in space
+        :param focal_len: The focal length of the camera, in degrees
+        :param screen: The pygame display to render to
+        """
+        Object3D.__init__(self, position)
         self.position = position
         self.focal_len = focal_len
         self.screen = screen
