@@ -54,12 +54,16 @@ class Camera(Object3D):
         :return: None
         """
         screen_coords = self.__get_screen_coords(poly)
-
+        if len(screen_coords) == 0:
+            return
         for px in screen_coords:
             pg.draw.circle(self.screen, poly.draw_color, px, 3)
 
     def draw_polyhedron_wireframe(self, poly: Polyhedron, line_weight: int | float) -> NoReturn:
         screen_coords = self.__get_screen_coords(poly)
+        if len(screen_coords) == 0:
+            return
+
         for segment in poly.line_segments:
             pg.draw.line(self.screen, poly.draw_color,
                          screen_coords[segment[0]], screen_coords[segment[1]],
