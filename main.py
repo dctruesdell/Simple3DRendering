@@ -1,31 +1,30 @@
 import pygame as pg
-import pygame.math as pgm
 from pygame.math import Vector3, Vector2
-from Polyhedron import Octahedron, Cube, Axis
+from Polyhedron import Octahedron, Cube
+from Object3D import Axis
 from Camera import Camera
-
 
 RESOLUTION = 1000, 600
 BG_COLOR = "black"
 FRAME_RATE = 30
-
 
 OCTAHEDRON = Octahedron(Vector3(256, 256, 0), 100, (0, 0, 255))
 CUBE = Cube(Vector3(256, 256, 0), 100, (255, 0, 0))
 SHAPES = [OCTAHEDRON, CUBE]
 
 ROTATE_AMOUNT = 1
+MOVE_SPEED = 1
 
 
 def main():
     pg.init()
     screen = pg.display.set_mode(RESOLUTION)
     clock = pg.time.Clock()
-    camera = Camera(pgm.Vector3(0, 0, 0), 180, screen)
+    camera = Camera(Vector3(0, 0, 0), 180, screen)
     active_shape = 0
 
     running = True
-    SHAPES[active_shape].translate(pgm.Vector3(0, 0, 50))
+    SHAPES[active_shape].translate(Vector3(0, 0, 50))
 
     while running:
         for event in pg.event.get():
@@ -40,6 +39,8 @@ def main():
 
         # reads full keyboard
         keys_down = pg.key.get_pressed()
+
+        # -- rotations --
         if keys_down[pg.K_UP]:
             SHAPES[active_shape].rotate(Axis.X, ROTATE_AMOUNT, True)
         elif keys_down[pg.K_DOWN]:
@@ -54,6 +55,17 @@ def main():
             SHAPES[active_shape].rotate(Axis.Z, ROTATE_AMOUNT, True)
         elif keys_down[pg.K_z]:
             SHAPES[active_shape].rotate(Axis.Z, -ROTATE_AMOUNT, True)
+
+        # -- camera movement --
+
+        if keys_down[pg.K_w]:
+            camera.translate(Vector3(0, 0, MOVE_SPEED))
+        elif keys_down[pg.K_s]:
+            camera.translate(Vector3(0, 0, -MOVE_SPEED))
+        if keys_down[pg.K_a]:
+            camera.translate(Vector3(MOVE_SPEED, 0, 0))
+        elif keys_down[pg.K_d]:
+            camera.translate(Vector3(-MOVE_SPEED, 0, 0))
 
         # draw step
         screen.fill(BG_COLOR)
