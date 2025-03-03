@@ -2,16 +2,10 @@ import math
 from typing import NoReturn
 from pygame.math import Vector3, Vector2
 import pygame as pg
-from enum import Enum
+from Object3D import *
 
 
-class Axis(Enum):
-    X = "x"
-    Y = "y"
-    Z = "z"
-
-
-class Polyhedron:
+class Polyhedron(Object3D):
     def __init__(self, position: Vector3,
                  scale_factor: int | float,
                  vertices: list[Vector3, ...] | None,
@@ -31,19 +25,12 @@ class Polyhedron:
                             renderer. The vertices are defined by their index in the vertex list.
 
         """
+        Object3D.__init__(self, position)
         self.position = position
         self.scale_factor = scale_factor
         self.vertices = vertices
         self.draw_color = draw_color
         self.line_segments = line_segments
-
-    def translate(self, translation_vector: Vector3) -> NoReturn:
-        """
-        Translates a point in space
-        :param translation_vector: The Vector3 to move
-        :return: None
-        """
-        self.position += translation_vector
 
     def rotate(self, axis: Axis, angle: int | float, degrees: bool = False) -> NoReturn:
         """
