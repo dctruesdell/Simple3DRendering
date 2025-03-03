@@ -49,8 +49,8 @@ class Camera(Object3D):
 
     def draw_polyhedron_vertices(self, poly: Polyhedron) -> NoReturn:
         """
-        Draw a 3d shape
-        :param poly: Any Polyhedron Object
+        Draw the vertices of a 3D shape
+        :param poly: The polyhedron to daw
         :return: None
         """
         screen_coords = self.__get_screen_coords(poly)
@@ -60,6 +60,12 @@ class Camera(Object3D):
             pg.draw.circle(self.screen, poly.draw_color, px, 3)
 
     def draw_polyhedron_wireframe(self, poly: Polyhedron, line_weight: int | float) -> NoReturn:
+        """
+        Draw a wireframe of a 3D shape
+        :param poly: The polyhedron to draw
+        :param line_weight: How many pixes wide to draw the edges
+        :return: None
+        """
         screen_coords = self.__get_screen_coords(poly)
         if len(screen_coords) == 0:
             return
