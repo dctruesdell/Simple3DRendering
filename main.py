@@ -13,7 +13,7 @@ CUBE = Cube(Vector3(256, 256, 0), 100, (255, 0, 0))
 SHAPES = [OCTAHEDRON, CUBE]
 
 ROTATE_AMOUNT = 1
-MOVE_SPEED = 1
+MOVE_SPEED = 15
 
 
 def main():
