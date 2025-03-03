@@ -36,7 +36,12 @@ class Camera(Object3D):
         ypos = vector.y * focal_ratio
         return Vector2(xpos, ypos)
 
-    def __get_screen_coords(self, poly: Polyhedron):
+    def __get_screen_coords(self, poly: Polyhedron) -> list[Vector2]:
+        """
+        Converts a polyhedron's vertices into a list of 2d points for the camera to render
+        :param poly: The polyhedron to render
+        :return: A list of screen coordinates to draw to
+        """
         screen_coords = []
         for vertex in poly.vertices:
             screen_coords.append(self.__xyz_to_xy(vertex + self.position) + self.screen_offset)
