@@ -23,14 +23,14 @@ class Camera(Object3D):
         screen_size = pg.display.get_window_size()
         self.screen_offset = Vector2(screen_size[0] // 2, screen_size[1] // 2)
 
-    def __xyz_to_xy(self, vector: Vector3) -> Vector2:
+    def __xyz_to_xy(self, vector: Vector3, poly: Polyhedron) -> Vector2:
         """
         Convert a Vector3 to a 2d screen space
         :param vector: The 3d Vector to be converted
         :return: A 2d Vector representing where the input should be rendered
                 in screen space
         """
-        r = self.position.distance_to(vector)
+        r = self.position.distance_to(poly.position)
         focal_ratio = self.focal_len / r
         xpos = vector.x * focal_ratio
         ypos = vector.y * focal_ratio
@@ -44,7 +44,7 @@ class Camera(Object3D):
         """
         screen_coords = []
         for vertex in poly.vertices:
-            screen_coords.append(self.__xyz_to_xy(vertex + self.position) + self.screen_offset)
+            screen_coords.append(self.__xyz_to_xy(vertex + self.position, poly) + self.screen_offset)
         return screen_coords
 
     def draw_polyhedron_vertices(self, poly: Polyhedron) -> NoReturn:
