@@ -9,7 +9,7 @@ BG_COLOR = "black"
 FRAME_RATE = 30
 FOCAL_LEN = 270
 
-OCTAHEDRON = Octahedron(Vector3(256, 256, 0), 1000, (0, 0, 255))
+OCTAHEDRON = Octahedron(Vector3(256, 256, 0), 100, (0, 0, 255))
 CUBE = Cube(Vector3(256, 256, 0), 100, (255, 0, 0))
 SHAPES = [OCTAHEDRON, CUBE]
 
