@@ -66,6 +66,10 @@ def main_loop():
             camera.translate(Vector3(MOVE_SPEED, 0, 0))
         elif keys_down[pg.K_d]:
             camera.translate(Vector3(-MOVE_SPEED, 0, 0))
+        if keys_down[pg.K_q]:
+            camera.rotation += 1
+        elif keys_down[pg.K_e]:
+            camera.rotation -= 1
 
         # draw step
         screen.fill(BG_COLOR)

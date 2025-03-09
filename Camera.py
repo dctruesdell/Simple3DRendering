@@ -22,6 +22,7 @@ class Camera(Object3D):
         self.screen = screen
         screen_size = pg.display.get_window_size()
         self.screen_offset = Vector2(screen_size[0] // 2, screen_size[1] // 2)
+        self.rotation = 0  # in degrees
 
     def __xyz_to_xy(self, vector: Vector3, poly: Polyhedron) -> Vector2:
         """
