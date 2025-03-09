@@ -1,8 +1,10 @@
 import pygame as pg
-from pygame.math import Vector3, Vector2
+from settings import Controls
+from pygame.math import Vector3
 from Polyhedron import Octahedron, Cube
 from Object3D import Axis
 from Camera import Camera
+
 
 RESOLUTION = 1000, 600
 BG_COLOR = "black"
@@ -42,33 +44,35 @@ def main_loop():
         keys_down = pg.key.get_pressed()
 
         # -- rotations --
-        if keys_down[pg.K_UP]:
+        if keys_down[Controls.ROT_X_POS]:
             SHAPES[active_shape].rotate(Axis.X, ROTATE_AMOUNT, True)
-        elif keys_down[pg.K_DOWN]:
+        elif keys_down[Controls.ROT_X_NEG]:
             SHAPES[active_shape].rotate(Axis.X, -ROTATE_AMOUNT, True)
 
-        if keys_down[pg.K_RIGHT]:
+        if keys_down[Controls.ROT_Y_POS]:
             SHAPES[active_shape].rotate(Axis.Y, ROTATE_AMOUNT, True)
-        elif keys_down[pg.K_LEFT]:
+        elif keys_down[Controls.ROT_Y_NEG]:
             SHAPES[active_shape].rotate(Axis.Y, -ROTATE_AMOUNT, True)
 
-        if keys_down[pg.K_x]:
+        if keys_down[Controls.ROT_Z_POS]:
             SHAPES[active_shape].rotate(Axis.Z, ROTATE_AMOUNT, True)
-        elif keys_down[pg.K_z]:
+        elif keys_down[Controls.ROT_Z_NEG]:
             SHAPES[active_shape].rotate(Axis.Z, -ROTATE_AMOUNT, True)
 
         # -- camera movement --
-        if keys_down[pg.K_w]:
+        if keys_down[Controls.MOVE_FORWARD]:
             camera.translate(Vector3(0, 0, MOVE_SPEED))
-        elif keys_down[pg.K_s]:
+        elif keys_down[Controls.MOVE_LEFT]:
             camera.translate(Vector3(0, 0, -MOVE_SPEED))
-        if keys_down[pg.K_a]:
+
+        if keys_down[Controls.MOVE_BACKWARD]:
             camera.translate(Vector3(MOVE_SPEED, 0, 0))
-        elif keys_down[pg.K_d]:
+        elif keys_down[Controls.MOVE_RIGHT]:
             camera.translate(Vector3(-MOVE_SPEED, 0, 0))
-        if keys_down[pg.K_q]:
+
+        if keys_down[Controls.ROT_CAM_POS]:
             camera.rotation += 1
-        elif keys_down[pg.K_e]:
+        elif keys_down[Controls.ROT_CAM_NEG]:
             camera.rotation -= 1
 
         # draw step
