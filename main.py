@@ -2,12 +2,6 @@ import mainloop
 
 
 def main():
-    print("-" * 20)
-    print("Simple3DRenderer")
-    print("By Diana Truesdell")
-    print("2025")
-    print("-" * 20)
-
     load_success = True
 
     try:
@@ -24,11 +18,11 @@ def main():
         print(error)
         print("One or more Python files are missing. Visit http://github.com/dctruesdell/Simple3DRendering "
               "to download source code.")
+        load_success = False
 
     if not load_success:
         print("Unable to load.")
         return
-    input("Press enter to continue")
     mainloop.main_loop()
 
 

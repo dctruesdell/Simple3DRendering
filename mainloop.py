@@ -22,17 +22,37 @@ MOVE_SPEED = 15
 def main_loop():
     pg.init()
     screen = pg.display.set_mode(RESOLUTION)
+
     clock = pg.time.Clock()
     camera = Camera(Vector3(0, 0, 0), FOCAL_LEN, screen)
     active_shape = 0
 
+    # title screen text
+    font = pg.font.SysFont("Courier New", 24)
+    text = font.render(f"{"-" * 20}\nSimple3DRenderer By Diana Truesdell\n2025\n{"-" * 20}",
+                       False,
+                       (255, 255, 255))
+    text_rect = text.get_rect()
+    text_rect.center = (RESOLUTION[0] // 2, RESOLUTION[1] // 2)
+
+    screen.blit(text, text_rect)
+    pg.display.flip()
+
+    title_screen = True
+    while title_screen:
+        keys_down = pg.key.get_pressed()
+        for event in pg.event.get():
+            if keys_down[Controls.CONTINUE]:
+                title_screen = False
+            if event.type == pg.QUIT:
+                return
+
     running = True
     SHAPES[active_shape].translate(Vector3(0, 0, 1))
-
     while running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
-                running = False
+                return
 
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_c:

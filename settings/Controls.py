@@ -17,3 +17,5 @@ MOVE_BACKWARD = pg.K_s
 MOVE_RIGHT = pg.K_d
 ROT_CAM_POS = pg.K_e
 ROT_CAM_NEG = pg.K_q
+
+CONTINUE = pg.K_RETURN
